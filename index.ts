@@ -46,7 +46,7 @@ const swaggerDefinition = {
     },
     servers: [
         {
-            url: 'http://localhost:5000',
+            url: 'https://fetchpix.one',
         },
     ],
 };
@@ -116,6 +116,9 @@ app.get('/metrics', async (c) => {
 
 /**
  * Interface representing the structure of an image response.
+ * @property url - The URL of the image.
+ * @property time_taken - The time taken to fetch the image.
+ * @property download_url - The download URL for the image.
  */
 interface ImageResponse {
     url: string;
