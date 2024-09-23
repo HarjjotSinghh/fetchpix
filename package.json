@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "module": "index.ts",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev-win": "cmd.exe /c \"bun run index.ts --watch --hot | pino-pretty\"",
+    "dev-mac": "bun run index.ts --watch --hot | pino-pretty",
+    "dev": "bun run index.ts --watch --hot | pino-pretty",
+    "start": "bun run index.ts --watch --hot | pino-pretty"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.1",
+    "@types/pretty": "^2.0.3",
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0",
+    "hono": "^4.6.2",
+    "pino": "^9.4.0",
+    "pino-elasticsearch": "^8.0.0",
+    "pino-pretty": "^11.2.2",
+    "pretty": "^2.0.0"
+  }
+}
