@@ -17,7 +17,7 @@ services:
     command: bun run index.ts --watch --hot | pino-pretty
   
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
+    image: elasticsearch:8.15.1
     ports:
       - "9200:9200"
     environment:
@@ -28,7 +28,7 @@ services:
       - xpack.security.transport.ssl.enabled=false
 
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.15.0
+    image: kibana:8.15.1
     ports:
       - "5601:5601"
     depends_on:
