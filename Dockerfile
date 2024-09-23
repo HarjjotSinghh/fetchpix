@@ -14,7 +14,7 @@ RUN bun install
 COPY . .
 
 # Expose the port the app runs on
-EXPOSE 5000
+EXPOSE 5000 5001
 
 # Command to run the application
 CMD ["bun", "run", "index.ts", "--watch", "--hot", "|", "pino-pretty"]
