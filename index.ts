@@ -62,7 +62,7 @@ const swaggerSpec = swaggerJsdoc(options);
  * Express app to serve Swagger docs.
  */
 const expressApp = express();
-expressApp.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+expressApp.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
 /**
  * @openapi
