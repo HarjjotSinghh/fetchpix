@@ -1,4 +1,4 @@
-xpack.security.enabled: true
+xpack.security.enabled: false
 xpack.security.transport.ssl.enabled: false
 discovery.type: single-node
 cluster.routing.allocation.enable: all
