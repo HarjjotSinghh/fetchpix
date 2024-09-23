@@ -8,46 +8,152 @@ import { timing, type TimingVariables } from 'hono/timing'
 import logger from './logger'
 import Pool from 'worker-threads-pool'
 import NodeCache from 'node-cache'
+import swaggerJsdoc from 'swagger-jsdoc'
+import swaggerUi from 'swagger-ui-express'
+import express from 'express'
 
-type Variables = TimingVariables
+/**
+ * Type definition for timing variables.
+ */
+type Variables = TimingVariables;
 
-const app = new Hono<{ Variables: Variables }>()
-app.use(timing())
+/**
+ * Hono application instance.
+ */
+const app = new Hono<{ Variables: Variables }>();
+app.use(timing());
 
-const cache = new NodeCache({ stdTTL: 3600 / 2 }) // Cache for 30 minutes
-const pool = new Pool({ max: 4 }) // Pool with 4 worker threads
+/**
+ * Cache instance for storing image URLs.
+ * The cache has a time-to-live of 30 minutes.
+ */
+const cache = new NodeCache({ stdTTL: 3600 / 2 }); // Cache for 30 minutes
 
+/**
+ * Worker thread pool with a maximum of 4 threads.
+ */
+const pool = new Pool({ max: 4 }); // Pool with 4 worker threads
+
+/**
+ * Swagger definition.
+ */
+const swaggerDefinition = {
+    openapi: '3.0.0',
+    info: {
+        title: 'Fetchpix API Reference',
+        version: '1.0.0',
+        description: 'A simple and lightweight API to fetch random image URLs based on search queries.',
+    },
+    servers: [
+        {
+            url: 'http://localhost:5000',
+        },
+    ],
+};
+
+const options = {
+    swaggerDefinition,
+    apis: ['index.ts'], // Path to the API docs
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+
+/**
+ * Express app to serve Swagger docs.
+ */
+const expressApp = express();
+expressApp.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
+
+/**
+ * @openapi
+ * /metrics:
+ *   get:
+ *     description: Retrieve Prometheus metrics
+ *     responses:
+ *       200:
+ *         description: Metrics in text format
+ */
+
+/**
+ * @openapi
+ * /:
+ *   get:
+ *     description: Fetch a random image URL based on a search query
+ *     parameters:
+ *       - name: q
+ *         in: query
+ *         description: Search query for fetching images
+ *         required: false
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: A JSON response containing the image URL and metadata
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 url:
+ *                   type: string
+ *                 time_taken:
+ *                   type: string
+ *                 download_url:
+ *                   type: string
+ *       404:
+ *         description: No images found for the given query
+ */
+
+/**
+ * Endpoint to retrieve Prometheus metrics.
+ * @param c - The context object for the request.
+ * @returns The metrics in text format.
+ */
 app.get('/metrics', async (c) => {
-    c.header('Content-Type', client.register.contentType)
-    return c.text(await client.register.metrics())
-})
+    c.header('Content-Type', client.register.contentType);
+    return c.text(await client.register.metrics());
+});
 
+/**
+ * Interface representing the structure of an image response.
+ */
 interface ImageResponse {
-    url: string
-    time_taken: string
-    download_url: string
+    url: string;
+    time_taken: string;
+    download_url: string;
 }
 
+/**
+ * Fetches image URLs based on a search query.
+ * @param query - The search query for fetching images.
+ * @returns A promise that resolves to an array of image URLs.
+ */
 async function fetchImageUrls(query: string): Promise<string[]> {
-    const url = `https://pxhere.com/en/photos?q=${encodeURIComponent(query)}&search=&NSFW=off`
+    const url = `https://pxhere.com/en/photos?q=${encodeURIComponent(query)}&search=&NSFW=off`;
     try {
-        const startTime = Date.now()
-        const { data } = await axios.get(url)
-        const $ = cheerio.load(data)
+        const startTime = Date.now();
+        const { data } = await axios.get(url);
+        const $ = cheerio.load(data);
         const imageUrls = $('img[src^="https://"]')
             .map((_, el) => $(el).attr('src'))
             .get()
-            .filter(Boolean) as string[]
+            .filter(Boolean) as string[];
 
-        logger.info(`Fetched ${imageUrls.length} images in ${Date.now() - startTime}ms`)
+        logger.info(`Fetched ${imageUrls.length} images in ${Date.now() - startTime}ms`);
 
-        return imageUrls
+        return imageUrls;
     } catch (error) {
-        logger.error('An error occurred:', error)
-        return []
+        logger.error('An error occurred:', error);
+        return [];
     }
 }
 
+/**
+ * Generates a download URL for a given image URL.
+ * @param randomUrl - The image URL to generate a download link for.
+ * @returns The download URL for the image.
+ * @throws Will throw an error if the image URL is invalid.
+ */
 function getDownloadUrl(randomUrl: string): string {
     const urlParts = randomUrl.split('/');
     const imageId = urlParts[urlParts.length - 1].split('-').pop()?.split('.')[0];
@@ -58,6 +164,11 @@ function getDownloadUrl(randomUrl: string): string {
 }
 
 if (isMainThread) {
+    /**
+     * Main route handler for the application.
+     * @param c - The context object for the request.
+     * @returns A JSON response containing the image URL and metadata.
+     */
     app.get('/', async (c) => {
         const startTime = Date.now();
         const query = c.req.query('q') || 'blue sky';
@@ -101,11 +212,16 @@ if (isMainThread) {
     });
 
     const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
+    const docsPort = process.env.DOCS_PORT ? parseInt(process.env.DOCS_PORT) : 5001;
     logger.info(`Successfully started server on port ${port}`);
 
     serve({
         fetch: app.fetch,
         port
+    });
+
+    expressApp.listen(docsPort, () => {
+        logger.info(`Swagger docs available at http://localhost:${docsPort}/docs`);
     });
 } else {
     (async () => {
