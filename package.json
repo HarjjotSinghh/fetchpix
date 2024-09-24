@@ -8,10 +8,10 @@
     "dev-mac": "bun run index.ts --watch --hot | pino-pretty",
     "dev": "bun run index.ts --watch --hot | pino-pretty",
     "start": "bun run index.ts --watch --hot | pino-pretty",
-    "test": "PORT=3001 jest __tests__",
-    "test:e2e": "PORT=3001 jest __tests__/e2e",
-    "test:integration": "PORT=3001 jest __tests__/integration",
-    "test:unit": "PORT=3001 jest __tests__/unit"
+    "test": "jest __tests__",
+    "test:e2e": "jest __tests__/e2e",
+    "test:integration": "jest __tests__/integration",
+    "test:unit": "jest __tests__/unit"
   },
   "devDependencies": {
     "@types/bun": "latest"
