@@ -1,16 +1,20 @@
+<<<<<<< HEAD
 ![Header Image](https://i.ibb.co/L04qJbR/twitter-header.png)
+=======
+![twitter header](https://github.com/user-attachments/assets/34199692-317b-428a-98b6-48dbc34c9e8a)
+>>>>>>> 1eb2e7f (add: unit, integration and e2e tests)
 
 ## [![CC BY-NC 4.0][cc-by-nc-shield]][cc-by-nc]
 
-[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/green?icon=github)](https://github.com/Naereen/badges/)
-[![GitHub stars](https://badgen.net/github/stars/HarjjotSinghh/fetchpix?color=green)](https://GitHub.com/HarjjotSinghh/fetchpix/stargazers/)
-[![Maintainer](https://badgen.net/badge/maintainer/Harjot%20Singh%20Rana/green)](https://harjot.pro)
-[![GitHub branches](https://badgen.net/github/branches/HarjjotSinghh/fetchpix?color=green)](https://github.com/HarjjotSinghh/fetchpix)
-[![GitHub commits](https://badgen.net/github/commits/HarjjotSinghh/fetchpix?color=green)](https://github.com/HarjjotSinghh/fetchpix/commits/main)
-[![GitHub last commit](https://badgen.net/github/last-commit/HarjjotSinghh/fetchpix?color=green)](https://github.com/HarjjotSinghh/fetchpix/commits/main)
-[![GitHub issues](https://badgen.net/github/issues/HarjjotSinghh/fetchpix?color=green)](https://github.com/HarjjotSinghh/fetchpix/issues)
-[![GitHub pull requests](https://badgen.net/github/prs/HarjjotSinghh/fetchpix?color=green)](https://github.com/HarjjotSinghh/fetchpix/pulls)
-[![GitHub watchers](https://badgen.net/github/watchers/HarjjotSinghh/fetchpix?color=green)](https://GitHub.com/HarjjotSinghh/fetchpix/watchers/)
+[![Open Source? Yes!](https://badgen.net/badge/Open%20Source%20%3F/Yes%21/blue?icon=github)](https://github.com/Naereen/badges/)
+[![GitHub stars](https://badgen.net/github/stars/HarjjotSinghh/fetchpix?color=blue)](https://GitHub.com/HarjjotSinghh/fetchpix/stargazers/)
+[![Maintainer](https://badgen.net/badge/maintainer/Harjot%20Singh%20Rana/blue)](https://harjot.pro)
+[![GitHub branches](https://badgen.net/github/branches/HarjjotSinghh/fetchpix?color=blue)](https://github.com/HarjjotSinghh/fetchpix)
+[![GitHub commits](https://badgen.net/github/commits/HarjjotSinghh/fetchpix?color=blue)](https://github.com/HarjjotSinghh/fetchpix/commits/main)
+[![GitHub last commit](https://badgen.net/github/last-commit/HarjjotSinghh/fetchpix?color=blue)](https://github.com/HarjjotSinghh/fetchpix/commits/main)
+[![GitHub issues](https://badgen.net/github/issues/HarjjotSinghh/fetchpix?color=blue)](https://github.com/HarjjotSinghh/fetchpix/issues)
+[![GitHub pull requests](https://badgen.net/github/prs/HarjjotSinghh/fetchpix?color=blue)](https://github.com/HarjjotSinghh/fetchpix/pulls)
+[![GitHub watchers](https://badgen.net/github/watchers/HarjjotSinghh/fetchpix?color=blue)](https://GitHub.com/HarjjotSinghh/fetchpix/watchers/)
 
 [cc-by-nc]: LICENSE
 [cc-by-nc-image]: https://licensebuttons.net/l/by-nc/4.0/88x31.png
@@ -76,6 +80,7 @@ technologies and microservices architecture to provide a scalable and efficient 
 - **Hono**: A small, simple, and fast web framework for the edge.
 - **Axios**: Promise-based HTTP client for the browser and Node.js.
 - **Cheerio**: Fast, flexible, and lean implementation of core jQuery designed specifically for the server.
+- **Prometheus**: An open-source monitoring system with a time series database.
 - **Swagger**: Simplifies API development by providing tools for API documentation.
 - **Elasticsearch**: A distributed, RESTful search and analytics engine.
 - **Kibana**: Visualization tool for Elasticsearch.

@@ -20,7 +20,7 @@ type Variables = TimingVariables;
 /**
  * Hono application instance.
  */
-const app = new Hono<{ Variables: Variables }>();
+export const app = new Hono<{ Variables: Variables }>();
 app.use(timing());
 
 /**
@@ -61,7 +61,7 @@ const swaggerSpec = swaggerJsdoc(options);
 /**
  * Express app to serve Swagger docs.
  */
-const expressApp = express();
+export const expressApp = express();
 expressApp.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec, { explorer: true }));
 
 /**
@@ -157,7 +157,7 @@ async function fetchImageUrls(query: string): Promise<string[]> {
  * @returns The download URL for the image.
  * @throws Will throw an error if the image URL is invalid.
  */
-function getDownloadUrl(randomUrl: string): string {
+export function getDownloadUrl(randomUrl: string): string {
     const urlParts = randomUrl.split('/');
     const imageId = urlParts[urlParts.length - 1].split('-').pop()?.split('.')[0];
     if (!imageId) {
@@ -212,6 +212,23 @@ if (isMainThread) {
                 });
             });
         });
+    });
+
+    // Handle unsupported methods for the '/' endpoint
+    app.post('/*', (c) => {
+        return c.json({ error: 'Method Not Allowed' }, 405, { 'Content-Type': 'application/json' });
+    });
+    app.put('/*', (c) => {
+        return c.json({ error: 'Method Not Allowed' }, 405, { 'Content-Type': 'application/json' });
+    });
+    app.delete('/*', (c) => {
+        return c.json({ error: 'Method Not Allowed' }, 405, { 'Content-Type': 'application/json' });
+    });
+    app.patch('/*', (c) => {
+        return c.json({ error: 'Method Not Allowed' }, 405, { 'Content-Type': 'application/json' });
+    });
+    app.options('/*', (c) => {
+        return c.json({ error: 'Method Not Allowed' }, 405, { 'Content-Type': 'application/json' });
     });
 
     const port = process.env.PORT ? parseInt(process.env.PORT) : 5000;
