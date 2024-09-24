@@ -29,6 +29,7 @@ technologies and microservices architecture to provide a scalable and efficient 
 - [Table of Contents](#table-of-contents)
 - [Installation](#installation)
 - [Tech Stack](#tech-stack)
+- [Use Cases](#use-cases)
 - [Contribute](#contribute)
 
 ## Installation
@@ -75,7 +76,6 @@ technologies and microservices architecture to provide a scalable and efficient 
 - **Hono**: A small, simple, and fast web framework for the edge.
 - **Axios**: Promise-based HTTP client for the browser and Node.js.
 - **Cheerio**: Fast, flexible, and lean implementation of core jQuery designed specifically for the server.
-- **Prometheus**: Monitoring system and time series database.
 - **Swagger**: Simplifies API development by providing tools for API documentation.
 - **Elasticsearch**: A distributed, RESTful search and analytics engine.
 - **Kibana**: Visualization tool for Elasticsearch.
@@ -83,11 +83,16 @@ technologies and microservices architecture to provide a scalable and efficient 
 - **Node-Cache**: Simple and fast Node.js internal caching.
 - **Winston**: A logger for just about everything.
 
+## Use Case
+
+Here is the use case for the Fetchpix API:
+
+#### Web Design / Prototyping
+
+- Fetch images for use in web design mockups or prototypes.
+- Use random stock images as placeholders in web design mockups.
+
 ## Contribute
 
 We welcome contributions! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) for more details on how to contribute to
 this project.
-
----
-
-Feel free to add any other relevant sections as needed.
