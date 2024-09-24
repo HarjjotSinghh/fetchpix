@@ -10,6 +10,7 @@ services:
       - '5001:5001'
     environment:
       - PORT=5000
+      - DOCS_PORT=5001
     depends_on:
       - elasticsearch
     volumes:
